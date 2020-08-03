@@ -1,47 +1,49 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+
 <head>
-  <title>Narrative Visualization CS 489</title>
+    <title>Narrative Visualization CS 489</title>
 </head>
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
+
 <body>
-  <h1>Coronavirus Lockdowns in the USA</h1>
-  <h3>Description</h3>
-  <p>
-    both Colorado and Montana were the first states to lift stay at home orders, as we can see below the lockdown
-    did not have sufficient time to take effect in Colorado. New York while being the hardest hit during the initial
-    phase of this pandemic has also seen the most effective lockdown 
-  </p>
-  
-  <a href="states.html">previous slide </a>
-  <h3>Select a State</h3>
-  <select id="selectButton"></select>
-  <div id="my_dataviz"></div>
-  <h3>Stay at Home Lifted</h3>
-  <p>
+    <h1>Coronavirus Lockdowns in the USA</h1>
+    <h3>Description</h3>
+    <p>
+        both Colorado and Montana were the first states to lift stay at home orders, as we can see below the lockdown
+        did not have sufficient time to take effect in Colorado. New York while being the hardest hit during the initial
+        phase of this pandemic has also seen the most effective lockdown
+    </p>
+
+    <a href="states.html">previous slide </a>
+    <h3>Select a State</h3>
+    <select id="selectButton"></select>
+    <div id="my_dataviz"></div>
+    <h3>Stay at Home Lifted</h3>
+    <p>
     <ul>
-      <li>April 26: Colorado, Montana</li>
-      <li>April 27: Mississippi </li>
-      <li>April 30: Alabama, Georgia, Idaho, Maine, Tennessee, Texas</li>
-      <li>May 1: Indiana</li>
-      <li>May 3: Missouri</li>
-      <li>May 4: Florida, Kansas, South Carolina, West Virginia</li>
-      <li>May 13: Wisconsin</li>
-      <li>May 15: Louisiana, Maryland</li>
-      <li>May 18: Massachusetts</li>
-      <li>May 30: Illinois</li>
-      <li>June 2: Michigan</li>
-      <li>June 9: New Jersey</li>
-      <li>April 11: New Hampshire</li>
+        <li>April 26: Colorado, Montana</li>
+        <li>April 27: Mississippi </li>
+        <li>April 30: Alabama, Georgia, Idaho, Maine, Tennessee, Texas</li>
+        <li>May 1: Indiana</li>
+        <li>May 3: Missouri</li>
+        <li>May 4: Florida, Kansas, South Carolina, West Virginia</li>
+        <li>May 13: Wisconsin</li>
+        <li>May 15: Louisiana, Maryland</li>
+        <li>May 18: Massachusetts</li>
+        <li>May 30: Illinois</li>
+        <li>June 2: Michigan</li>
+        <li>June 9: New Jersey</li>
+        <li>April 11: New Hampshire</li>
     </ul>
-  </p>
+    </p>
 </body>
 
 <style>
-  .myCircle:hover {
-    stroke: black;
-  }
+    .myCircle:hover {
+        stroke: black;
+    }
 </style>
 
 
@@ -117,8 +119,8 @@
             }
         },
         function (data) {
-            var allGroup = ["co", "mt", "ms", "al", "ga", "id", "me", "tn", "tx", "in", "mo", "fl", "ks", "sc", 
-            "wv", "wi", "la", "md", "ma", "il", "mi", "nj", "nh"]
+            var allGroup = ["co", "mt", "ms", "al", "ga", "id", "me", "tn", "tx", "in", "mo", "fl", "ks", "sc",
+                "wv", "wi", "la", "md", "ma", "il", "mi", "nj", "nh"]
             d3.select("#selectButton")
                 .selectAll('myOptions')
                 .data(allGroup)
@@ -198,6 +200,14 @@
                 .on("mouseover", mouseover)
                 .on("mousemove", mousemove)
                 .on("mouseleave", mouseleave)
+
+            var myText = svg
+                .append("text")
+                .attr("x", 235)
+                .attr("y", 400)
+                .attr('text-anchor', 'middle')
+                .attr("class", "myLabel")
+                .text("Stay At Home Order Lifted");
 
             function update(selectedGroup) {
 

@@ -150,6 +150,14 @@
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
 
+        var myText = svg
+        .append("text")
+        .attr("x", 150)
+        .attr("y", 400)
+        .attr('text-anchor', 'middle')
+        .attr("class", "myLabel")
+        .text("All Stay At Home Order Issued");
+
       var Tooltip = d3.select("#my_dataviz")
         .append("div")
         .style("opacity", 0)

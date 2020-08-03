@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+
 <head>
   <title>Narrative Visualization CS 489</title>
 </head>
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
+
 <body>
   <h1>Coronavirus Lockdowns in the USA</h1>
   <h3>Description</h3>
   <p>
-    The first state to institute a stay at home order was California, as we can see below the number of cases 
-    has not stabilized. Illinois and New York instituted stay at home orders within days of California, New York 
+    The first state to institute a stay at home order was California, as we can see below the number of cases
+    has not stabilized. Illinois and New York instituted stay at home orders within days of California, New York
     was hit hardest, in terms of early case load but has also leveled off the most in terms of new cases.
   </p>
-  
+
   <a href="country.html">previous slide </a>
   <a href="summary.html"> next slide</a>
   <h3>Select a State</h3>
@@ -21,24 +23,24 @@
   <div id="my_dataviz"></div>
   <h3>Stay at Home Ordered</h3>
   <p>
-    <ul>
-      <li>March 19: California</li>
-      <li>March 21: Illinois, New Jersey </li>
-      <li>March 22: New York  </li>
-      <li>March 23: Connecticut, Louisiana, Ohio, Oregon, Washington, West Virginia  </li>
-      <li>March 24: Delaware Michigan New Mexico Massachusetts    </li>
-      <li>March 25: Hawaii, Idaho, Indiana Vermont Wisconsin   </li>
-      <li>March 26: Colorado Kentucky   </li>
-      <li>March 28: Alaska Montana Rhode Island    </li>
-      <li>March 30: District of Columbia Kansas Maryland North Carolina Virginia </li>
-      <li>March 31: Arizona    </li>
-      <li>April 1: Nevada Pennsylvania    </li>
-      <li>April 2: Maine Tennessee Texas Oklahoma    </li>
-      <li>April 3: Florida Georgia Mississippi    </li>
-      <li>April 4: Alabama    </li>
-      <li>April 6: Missouri    </li>
-      <li>April 7: South Carolina     </li>
-    </ul>
+  <ul>
+    <li>March 19: California</li>
+    <li>March 21: Illinois, New Jersey </li>
+    <li>March 22: New York </li>
+    <li>March 23: Connecticut, Louisiana, Ohio, Oregon, Washington, West Virginia </li>
+    <li>March 24: Delaware Michigan New Mexico Massachusetts </li>
+    <li>March 25: Hawaii, Idaho, Indiana Vermont Wisconsin </li>
+    <li>March 26: Colorado Kentucky </li>
+    <li>March 28: Alaska Montana Rhode Island </li>
+    <li>March 30: District of Columbia Kansas Maryland North Carolina Virginia </li>
+    <li>March 31: Arizona </li>
+    <li>April 1: Nevada Pennsylvania </li>
+    <li>April 2: Maine Tennessee Texas Oklahoma </li>
+    <li>April 3: Florida Georgia Mississippi </li>
+    <li>April 4: Alabama </li>
+    <li>April 6: Missouri </li>
+    <li>April 7: South Carolina </li>
+  </ul>
   </p>
 </body>
 
@@ -131,7 +133,7 @@
         .data(allGroup)
         .enter()
         .append('option')
-        .text(function (d) { return d; }) 
+        .text(function (d) { return d; })
         .attr("value", function (d) { return d; })
       var x = d3.scaleTime()
         .domain(d3.extent(data, function (d) { return d.date; }))
@@ -174,7 +176,7 @@
         .append("path")
         .datum(data)
         .attr("d", d3.line()
-          .curve(d3.curveBasis) 
+          .curve(d3.curveBasis)
           .x(function (d) { return x(+d.date) })
           .y(function (d) { return y(+d.value) })
         )
@@ -184,14 +186,14 @@
 
       var start = new Date(2020, 02, 19, 00, 00, 00);
       var end = new Date(2020, 02, 19, 00, 00);
-      
+
       var dot = svg
         .append("g")
         .selectAll("dot")
         .data(data)
         .enter()
         .append("circle")
-        .filter(function (d) { return (d.date >= start && d.date <= end)})      
+        .filter(function (d) { return (d.date >= start && d.date <= end) })
         .style("fill", "red")
         .attr("class", "myCircle")
         .attr("cx", function (d) { return x(d.date) })
@@ -204,8 +206,16 @@
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
 
+      var myText = svg
+        .append("text")
+        .attr("x", 150)
+        .attr("y", 400)
+        .attr('text-anchor', 'middle')
+        .attr("class", "myLabel")
+        .text("Stay At Home Order Issued");
+
       function update(selectedGroup) {
-        
+
         var dataFilter = data.map(function (d) { return { date: d.date, value: d[selectedGroup] } })
 
         line
@@ -229,7 +239,7 @@
           var start = new Date(2020, 02, 22, 00, 00, 00);
           var end = new Date(2020, 02, 22, 00, 00);
         }
-        if (selectedGroup == "ct" || selectedGroup == "la" || selectedGroup == "oh" || selectedGroup == "or" || selectedGroup == "wa" || selectedGroup ==  "wv") {
+        if (selectedGroup == "ct" || selectedGroup == "la" || selectedGroup == "oh" || selectedGroup == "or" || selectedGroup == "wa" || selectedGroup == "wv") {
           var start = new Date(2020, 02, 23, 00, 00, 00);
           var end = new Date(2020, 02, 23, 00, 00);
         }
@@ -278,7 +288,7 @@
           var end = new Date(2020, 03, 04, 00, 00);
         }
 
-        if (selectedGroup == "mo" || selectedGroup == "sc" ) {
+        if (selectedGroup == "mo" || selectedGroup == "sc") {
           var start = new Date(2020, 03, 06, 00, 00, 00);
           var end = new Date(2020, 03, 06, 00, 00);
         }
